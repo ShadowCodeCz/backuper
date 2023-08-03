@@ -67,6 +67,8 @@ class DirectoryBackuperCommand:
             self.ac.logger().info(f"dst: {output_path}")
 
         if self.arguments.remove:
+            if (os.path.normpath(self.arguments.path) == os.path.normpath(os.getcwd())):
+                os.chdir(os.path.dirname(os.path.abspath(self.arguments.path)))
             shutil.rmtree(self.arguments.path)
 
     def output_path(self):
